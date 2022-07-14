@@ -1,0 +1,41 @@
+canvas {
+	border-radius: 20px;
+}
+
+.info-box{
+	background-color:#293441;
+}
+
+.info-box .info-box-icon{
+	width:60px;
+	height:60px;
+	background-color:red; 
+	border-radius:2em;
+	margin-top: 15px;
+	margin-left: 20px;
+}
+
+.info-box .fa{
+	font-size: 30px;
+	color: white;
+	position: absolute;
+	left:50px;
+	top: 29px;
+}
+
+.info-box .info-box-content{
+	background-color:#293441;
+}
+.info-box .info-box-text{
+	color: white;
+	font-size: 15px;
+	font-weight:bolder;
+	margin-left: 35%;
+	margin-top: 15px;
+}
+.info-box-number{
+	color: white;
+	font-size: 13px;
+	margin-left: 45%;
+	margin-top: 10px;
+}

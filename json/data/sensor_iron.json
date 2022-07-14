@@ -1,0 +1,34 @@
+[
+    {
+		"id":1,
+		"name":"001",
+		"location":"浙江湖州",
+		"model":"2",
+		"data":"56",
+		"precision":120.09,
+		"latitude":30.87,
+		"time":5,
+		"total":5,
+	    "situation":"危险",
+		"warndata":"56",
+		"oneAlertPeopleName":"li",
+		"twoAlertPeopleName":"wang",
+		"threeAlertPeopleName":"pan"	
+    },
+	{
+		"id":2,
+		"name":"002",
+		"location":"浙江嘉兴",
+		"model":"2",
+		"data":"56",
+		"precision":120.75,
+		"latitude":30.71,
+		"time":"5",
+		"total":5,
+	    "situation":"危险",
+		"warndata":"56",
+		"oneAlertPeopleName":"li",
+		"twoAlertPeopleName":"wang",
+		"threeAlertPeopleName":"pan"	
+	}
+]

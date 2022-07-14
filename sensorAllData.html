@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>数据总表</title>
+    <meta name="description" content="AdminLTE2定制版">
+    <meta name="keywords" content="AdminLTE2定制版">
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+   
+   <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css">
+   <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
+   <link rel="stylesheet" href="plugins/adminLTE/css/AdminLTE.css">
+   <link rel="stylesheet" href="plugins/adminLTE/css/skins/_all-skins.min.css">
+   <link rel="stylesheet" href="css/index.css">
+	<style>
+		.el-input__inner{
+			height: 30px;
+		}
+	</style>
+</head>
+
+<body class="hold-transition skin-purple sidebar-mini">
+	<script src="js/vue.global.js"></script>
+	<script src="js/index.full.js"></script>
+    <div class="wrapper">
+		<div class="content" style="margin-left: 0%;height: 800px;">
+		  <!-- 内容头部 -->
+			 <section class="content-header">
+				 <p style="color: white;font-size: 23px;font-weight:bold;margin-left:1.5%">
+				     数据总表
+				 </p>
+			 </section>
+		   <!-- 内容头部 /-->
+		 
+			 <!-- 正文区域 -->
+			 <section class="content" style="height: 500px;">
+ 
+				 <!-- .box-body -->
+				 <div class="box box-primary" style="background-color:#293441;">
+ 
+					 <div class="box-body" id="app">
+						 <!-- 数据表格 -->
+						 <div class="table-box">
+ 
+							 <!--工具栏-->
+							 <div class="pull-left" style="margin-left:32%;margin-top:0%">
+							  <el-form ref="form" :model="form" label-width="80px">
+								  <el-date-picker
+										  v-model="value1"
+										  type="datetimerange"
+										  :shortcuts="shortcuts"
+										  range-separator="~"
+										  start-placeholder="开始日期"
+										  end-placeholder="结束日期"
+								  >
+								  </el-date-picker>
+<!--							    <el-date-picker-->
+<!--							      v-model="value7"-->
+<!--							      type="datetimerange"-->
+<!--							      align="right"-->
+<!--							      unlink-panels-->
+<!--							      range-separator="~"-->
+<!--							      start-placeholder="开始日期"-->
+<!--							      end-placeholder="结束日期"-->
+<!--							      :picker-options="pickerOptions2">-->
+<!--							    </el-date-picker>-->
+								 <el-button type="primary" size="mini" style="margin-left:4px" @click="searchByTime">查询</el-button>
+							  </el-form>
+							 </div>
+							 <div class="box-tools pull-right">
+								 <div class="has-feedback">
+									 <el-input v-model="search"  style="width: 100%;height: 10%;" type="text" class="name" placeholder="根据传感器名称搜索" @input="a(search)"></el-input>
+									 <span class="glyphicon glyphicon-search form-control-feedback"></span>
+								 </div>
+							 </div>
+							 <br>
+							 <!--工具栏/-->
+ 
+							 <!--数据列表-->
+							 <div>
+						     <br>
+							 <br>
+							 <el-table
+							     :cell-style="cellStyle()"
+							     :header-cell-style="cellStyle()"
+								 :row-style="{height: '0'}"
+								 :data="list"
+							     border
+							     style="width: 100%">
+								 <el-table-column
+								    align="center"
+								    label="数据编号"
+									min-width="10%"
+								    prop="dataId">
+								 </el-table-column>
+							     </el-table-column>
+							     <el-table-column
+								  align="center"
+								  min-width="10%"
+							       prop="name"
+							       label="传感器名称">
+							     </el-table-column>
+								 <el-table-column
+								   align="center"
+								   min-width="10%"
+								   prop="x"
+								   label="x轴倾斜度">
+								 </el-table-column>
+								 <el-table-column
+								   align="center"
+								   min-width="10%"
+								   prop="y"
+								   label="y轴倾斜度">
+								 </el-table-column>
+								 <el-table-column
+								   align="center"
+								   min-width="10%"
+								   prop="total"
+								   label="总倾斜度">
+								 </el-table-column>
+								 <el-table-column
+								   align="center"
+								   min-width="10%"
+								   prop="time"
+								   label="时间">
+								 </el-table-column>
+							 	</el-table-column>
+							 	<el-table-column
+								  min-width="10%"
+								  align="center"
+							 	  prop="solution"
+							 	  label="状态">
+							 	</el-table-column>
+							   </el-table>
+							   <div style="margin-top:1%">
+							   	<el-row :gutter="10">
+							   		<el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
+							   		<el-col :span="8">
+										<el-pagination
+										  right
+										  background
+										  @size-change="handleSizeChange"
+										  @current-change="handleCurrentChange"
+										  :current-page="page" 
+										  :page-sizes="[5,7,10,15,20]" 
+										  :page-size="limit"
+										  layout="total, sizes, prev, pager, next, jumper" 
+										  :total="total">
+										</el-pagination>
+							   		</el-col>
+							   	</el-row>
+							   </div>
+							 </div><br />
+							 <!-- /表格 -->
+							 
+							 <!--数据列表/--> 
+						 </div>
+						 <!-- 数据表格 /--> 
+					 </div>
+					 <!-- /.box-body -->
+ 
+				
+ 
+ 
+				 </div>
+ 
+			 </section>
+			 <!-- 正文区域 /-->
+        </div>
+    </div>
+
+    <script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
+	<script>	
+	    $.get('json/data/sensor_data.json',function(ret){
+			var Main = {
+			  data() {
+			             return {
+			                 list: [],
+			                 data: [],
+			                 limit: 7,
+			                 total: null,
+			                 page: 1,
+			                 searchData: "",
+							 search:'',
+							 searchInput:'',
+							 shortcuts: [
+								 {
+									 text: '最近一周',
+									 value: () => {
+										 const end = new Date()
+										 const start = new Date()
+										 start.setTime(start.getTime() - 3600 * 1000 * 24 * 7)
+										 return [start, end]
+									 },
+								 },
+								 {
+									 text: '最近一个月',
+									 value: () => {
+										 const end = new Date()
+										 const start = new Date()
+										 start.setTime(start.getTime() - 3600 * 1000 * 24 * 30)
+										 return [start, end]
+									 },
+								 },
+								 {
+									 text: '最近三个月',
+									 value: () => {
+										 const end = new Date()
+										 const start = new Date()
+										 start.setTime(start.getTime() - 3600 * 1000 * 24 * 90)
+										 return [start, end]
+									 },
+								 },
+							 ],
+							   value1: ''
+						};
+			         },
+			         created() {
+			             this.pageList()
+			         },
+			         methods: {
+						 focusInput() {
+						    this.$refs.sadadad.focus()
+						 },
+						 // changeDate() {
+							// console.log(this.dateValue)
+							// this.timeDate = this.dateValue[0] + "~" + this.dateValue[1];
+							// this.endTime = this.dateValue[1],
+							// this.startTime = this.dateValue[0],
+							// this.getAccessRecord()
+					  //    },
+						 update(){
+							 location.href="sensorDataBaseUpdate.html"
+						 },
+						 cellStyle(){
+						     return 'background-color:#293441;color:white;border-color:#2E72BF'						  
+						 },
+			             pageList() {
+			                 // 发请求拿到数据并暂存所有数据,方便以后操做
+							 for (var i = 0; i < ret.length; i++) {
+								 ret[i].time = this.dateFunction(ret[i].time);
+							 }
+			                 this.data = ret
+			                 this.getList()
+			             },
+			             // 处理数据
+			             getList() {
+			                 // es6过滤获得知足搜索条件的展现数据list
+			                 let list = this.data.filter((item, index) =>
+			                     item.time.includes(this.searchData)
+			                 )
+			                 this.list = list.filter((item, index) =>
+			                     index < this.page * this.limit && index >= this.limit * (this.page - 1)
+			                 )
+			                 this.total = list.length
+			             },
+			             // 当每页数量改变
+			             handleSizeChange(val) {
+			                 console.log(`每页 ${val} 条`);
+			                 this.limit = val
+			                 this.getList()
+			             },
+			             // 当当前页改变
+			             handleCurrentChange(val) {
+			                 console.log(`当前页: ${val}`);
+			                 this.page = val
+			                 this.getList()
+			             },
+						 // 搜索过滤数据
+						 search() {
+							 this.page = 1
+							 this.getList()
+						 },
+						 dateFunction(time) {
+							 var zoneDate = new Date(time).toJSON();
+							 var date = new Date(+new Date(zoneDate)+8*3600*1000).toISOString().replace(/T/g,' ').replace(/\.[\d]{3}Z/,'');
+							 return date;
+						 },
+						 a(search) {
+						 	 this.limit = 7;
+							 let _this = this;
+							 _this.list = _this.data.filter(Val => {
+								if(Val.name.includes(_this.search)) {
+									_this.list.push(Val);
+									return _this.list;
+								}
+							 })
+						 },
+						 searchByTime() {
+							 console.log(this.value1[0])
+						 }
+			         }
+			 };
+			const app = Vue.createApp(Main);
+			app.use(ElementPlus);
+			app.mount("#app")
+		})
+	</script>
+</body>
+
+</html>
+<!---->

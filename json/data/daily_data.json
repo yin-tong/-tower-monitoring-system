@@ -1,0 +1,9 @@
+[
+    {
+		"id":1,
+		"sensorName":"001",
+		"hourMax":25,
+		"hourMin":65,
+		"hourTime":"2020-9-14 13:34:02"
+    }
+]

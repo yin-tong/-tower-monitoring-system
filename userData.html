@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>个人信息</title>
+    <meta name="description" content="AdminLTE2定制版">
+    <meta name="keywords" content="AdminLTE2定制版">
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+   
+    <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
+    <link rel="stylesheet" href="plugins/adminLTE/css/AdminLTE.css">
+    <link rel="stylesheet" href="plugins/adminLTE/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="css/index.css">
+	<style>
+		.el-textarea__inner{
+			background-color: rgba(46,77,112,1) ;
+			color: white;
+		}
+		.el-input__inner{
+			background-color: rgba(46,77,112,1) ;
+			color: white;
+        }
+		.el-form-item__label{
+			color: white;
+		}
+	</style>
+</head>
+
+<body class="hold-transition skin-purple sidebar-mini">
+	<script src="js/vue.global.js"></script>
+	<script src="js/index.full.js"></script>
+    <div class="wrapper">
+		<div id="app" class="content" style="margin-left: 0%;height: 800px;>
+		  <!-- 内容头部 -->
+			 <section class="content-header">
+				 <p style="color: white;font-size: 23px;font-weight:bold;margin-left:1.5%">
+				     个人信息
+				 </p>
+			 </section>
+		   <!-- 内容头部 /-->
+		 
+			 <!-- 正文区域 -->
+			 <section class="content" style="height: 500px;">				 
+				 <!-- .box-body -->
+				 <div class="box box-primary" style="background-color:#293441;">
+					 <div class="box-body">						
+						 <div class="table-box">
+							 
+							 <el-form ref="form" :model="form" label-width="30%">	 
+							 
+								 <el-row :gutter="24">
+								   <el-col :span="22">
+									   <el-form-item  label="姓名:" style="margin-left:8%">
+											<el-input id="userName" v-model="form.userName" placeholder="姓名" style="width:71%"></el-input>								  
+									   </el-form-item>										   
+								   </el-col>				  
+								 </el-row>
+								 
+								 <el-row :gutter="24">
+								   <el-col :span="22">
+									   <el-form-item label="性别:" style="margin-left:8%">
+											<el-input  id="sex"  v-model="form.sex" placeholder="性别" style="width:71%"></el-input>								  
+									   </el-form-item>										   
+								   </el-col>				  
+								 </el-row>
+								 <el-row :gutter="24">
+								   <el-col :span="22">
+									   <el-form-item label="年龄:" style="margin-left:8%">
+											<el-input id="age" v-model="form.age" placeholder="年龄" style="width:71%"></el-input>								  
+									   </el-form-item>										   
+								   </el-col>				  
+								 </el-row>
+								 <el-row :gutter="24">
+								   <el-col :span="22">
+									   <el-form-item label="职位:" style="margin-left:8%">
+											<el-input id="post" v-model="form.post" placeholder="职位" style="width:71%"></el-input>								  
+									   </el-form-item>										   
+								   </el-col>				  
+								 </el-row>
+								 <el-row :gutter="24">
+								   <el-col :span="22">
+									   <el-form-item label="号码:" style="margin-left:8%">
+											<el-input id="tele" v-model="form.tele" placeholder="手机号码" style="width:71%"></el-input>								  
+									   </el-form-item>										   
+								   </el-col>				  
+								 </el-row>
+								 <el-row :gutter="24">
+								   <el-col :span="22">
+									   <el-form-item label="地址:" style="margin-left:8%">
+											<el-input id="address" v-model="form.address" placeholder="地址" style="width:71%"></el-input>								  
+									   </el-form-item>										   
+								   </el-col>				  
+								 </el-row>
+								 
+							   <el-row :gutter="24">
+								   <el-col :span="22">
+									   <el-form-item label="备注" style="margin-left:8%">
+											<el-input id="remarks" type="textarea" v-model="form.remarks" placeholder="备注" style="width:71%"></el-input>								  
+									   </el-form-item>										   
+								   </el-col>				  
+							   </el-row>
+							   
+							   <el-row :gutter="24">
+								   <el-col :span="22">
+									   	 <el-form-item style="margin-left:27%">
+											<el-button type="primary" @click="onSubmit">修改</el-button>
+											<el-button style="margin-left:5%" @click="cancel"> 取消</el-button>
+							            </el-form-item>								   
+								   </el-col>				  
+							   </el-row>
+							   
+							   
+							  
+							 </el-form>
+							 <!-- /表格 -->
+							 
+							 <!--数据列表/--> 
+						 </div>
+						
+					 </div>
+					 <!-- /.box-body -->					
+				 </div>
+ 
+			 </section>
+			 <!-- 正文区域 /-->
+        </div>
+    </div>
+    
+
+    <script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
+	
+	<script>
+		var userName = ''
+		var tele = ''
+		var address =''
+		var post =''
+		var age =''
+		var sex =''
+		var remarks =''
+		function getAdminData(){
+			$.get('json/data/admin.json',function(ret){
+				userName = ret[0].name
+				$("#userName").val(userName)
+				tele = ret[0].tele
+				$("#tele").val(tele)
+				address = ret[0].address 
+				$("#address").val(address)
+				post = ret[0].post
+				$("#post").val(post)
+				age = ret[0].age
+				$("#age").val(age)
+				sex = ret[0].sex
+				$("#sex").val(sex)
+				remarks = ret[0].remarks
+				$("#remarks").val(remarks)
+			})
+		}
+		getAdminData()
+		var Main = {
+		    data() {
+		      return {
+		        form: {
+		          userName: userName,
+		          tele: tele,
+		          address: address,
+		          post:post,
+		          age:age,
+		          sex:sex,
+		          remarks:remarks,
+		          delivery: false,
+		          type: [],
+		          resource: '',
+		          desc: ''
+		        }
+		      }
+		    },
+		    methods: {
+		      onSubmit() {
+				  userName =  $("#userName").val()
+				  tele = $("#tele").val()		        
+				  address =  $("#address").val()		        
+				  post = $("#post").val()		        
+				  age = $("#age").val()		        
+				  sex = $("#sex").val()		        
+				  remarks = $("#remarks").val()	
+		        console.log('submit!');
+		      },
+			 cancel() {
+			    getAdminData()
+			  }
+		    }
+		  }
+		;const app = Vue.createApp(Main);
+		app.use(ElementPlus);
+		app.mount("#app")
+	</script>
+</body>
+
+</html>
+<!---->

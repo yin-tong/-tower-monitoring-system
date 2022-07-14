@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>铁塔信息添加</title>
+    <meta name="description" content="AdminLTE2定制版">
+    <meta name="keywords" content="AdminLTE2定制版">
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+   
+   <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css">
+   <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
+   <link rel="stylesheet" href="plugins/adminLTE/css/AdminLTE.css">
+   <link rel="stylesheet" href="plugins/adminLTE/css/skins/_all-skins.min.css">
+   <link rel="stylesheet" href="css/index.css">
+	<style>
+		.el-input__inner{
+			background-color: rgba(46,77,112,1) ;
+			color: white;
+        }
+		.el-form-item__label{
+			color: white;
+		}
+	</style>
+</head>
+
+<body class="hold-transition skin-purple sidebar-mini">
+	<script src="js/vue.global.js"></script>
+	<script src="js/index.full.js"></script>
+    <div class="wrapper">
+		<div id="app" class="content" style="margin-left: 0%;height: 800px;>
+		  <!-- 内容头部 -->
+			 <section class="content-header">
+				 <p style="color: white;font-size: 23px;font-weight:bold;margin-left:1.5%">
+				     铁塔信息添加
+				 </p>
+			 </section>
+		   <!-- 内容头部 /-->
+		 
+			 <!-- 正文区域 -->
+			 <section class="content" style="height: 500px;">				 
+				 <!-- .box-body -->
+				 <div class="box box-primary" style="background-color:#293441;">
+					 <div class="box-body">						
+						 <div class="table-box">
+							 
+							 <el-form ref="form" :model="form" label-width="30%">	 
+							   
+							   <el-row :gutter="24">
+								   <el-col :span="22">
+									   <el-form-item label="铁塔名称:" style="margin-left:8%">
+											<el-input id="ironName" v-model="form.ironName" placeholder="铁塔名称" style="width:71%"></el-input>								  
+									   </el-form-item>										   
+								   </el-col>				  
+							   </el-row>
+							   
+							   <el-row :gutter="24">
+									   <el-col :span="22">
+										   <el-form-item label="经度:" style="margin-left:8%">
+												<el-input id="precision" v-model="form.precision" placeholder="经度" style="width:71%"></el-input>								  
+										   </el-form-item>										   
+									   </el-col>				  
+							   </el-row>
+							   
+							   <el-row :gutter="24">
+								   <el-col :span="22">
+									   <el-form-item label="纬度:" style="margin-left:8%">
+											<el-input id="latitude" v-model="form.latitude" placeholder="纬度" style="width:71%"></el-input>								  
+									   </el-form-item>										   
+								   </el-col>				  
+							   </el-row>
+							   
+							   <el-row :gutter="24">
+								   <el-col :span="22">
+									   <el-form-item label="位置:" style="margin-left:8%">
+											<el-input id="location" v-model="form.location" placeholder="位置" style="width:71%"></el-input>								  
+									   </el-form-item>										   
+								   </el-col>				  
+							   </el-row>
+							   
+							   <el-row :gutter="24">
+								   <el-col :span="22">
+									   <el-form-item label="第一负责人:" style="margin-left:8%">
+											<el-input id="oneAlertPepoleName" v-model="form.oneAlertPeopleName" placeholder="第一负责人" style="width:71%"></el-input>								  
+									   </el-form-item>										   
+								   </el-col>				  
+							   </el-row>
+							   
+							   <el-row :gutter="24">
+								   <el-col :span="22">
+									   <el-form-item label="第二负责人:" style="margin-left:8%">
+											<el-input id="twoAlertPepoleName" v-model="form.twoAlertPeopleName" placeholder="第二负责人" style="width:71%"></el-input>								  
+									   </el-form-item>										   
+								   </el-col>				  
+							   </el-row>
+							   
+							   <el-row :gutter="24">
+								   <el-col :span="22">
+									   <el-form-item label="第三负责人:" style="margin-left:8%">
+											<el-input id="threeAlertPepoleName" v-model="form.threeAlertPeopleName" placeholder="第三负责人" style="width:71%"></el-input>								  
+									   </el-form-item>										   
+								   </el-col>				  
+							   </el-row>
+							   
+							   <el-row :gutter="24">
+								   <el-col :span="22">
+									   	 <el-form-item style="margin-left:27%">
+											<el-button type="primary" @click="onSubmit">添加</el-button>
+											<el-button @click="back" style="margin-left:5%"> 返回</el-button>
+							            </el-form-item>								   
+								   </el-col>				  
+							   </el-row>
+							   
+							   
+							  
+							 </el-form>
+							 <!-- /表格 -->
+							 
+							 <!--数据列表/--> 
+						 </div>
+						
+					 </div>
+					 <!-- /.box-body -->					
+				 </div>
+ 
+			 </section>
+			 <!-- 正文区域 /-->
+        </div>
+    </div>
+
+    <script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
+	<script>
+		var Main = {
+		    data() {
+		      return {
+		        form: {
+					ironName:'',
+					precision:'',
+					latitude:'',
+					location:'',
+					oneAlertPeopleName:'',
+					twoAlertPeopleName:'',
+					threeAlertPeopleName:''
+		        }
+		      }
+		    },
+		    methods: {
+			 
+		      onSubmit() {
+				  if(this.form.ironName==''){
+					  confirm("铁塔名称不能为空");
+				  }else if(this.form.precision==''){
+					  confirm("经度不能为空");
+				  }else if(this.form.latitude==''){
+					  confirm("纬度不能为空");
+				  }else if(this.form.location==''){
+					  confirm("位置不能为空");
+				  }else if(this.form.oneAlertPeopleName==''){
+					  confirm("第一负责人不能为空");
+				  }else if(this.form.twoAlertPeopleName==''){
+					  confirm("第二负责人不能为空");
+				  }else if(this.form.threeAlertPeopleName==''){
+					  confirm("第三负责人不能为空");
+				  }else{
+					  //增加操作
+					  console.log(this.form);
+					  
+					  window.history.back();
+					  
+				  }
+		      },
+			  
+			  back() {
+			    window.history.back();
+			  }
+		    }
+		  }
+		;const app = Vue.createApp(Main);
+		app.use(ElementPlus);
+		app.mount("#app")
+	</script>
+</body>
+
+</html>
+<!---->

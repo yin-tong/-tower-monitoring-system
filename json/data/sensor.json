@@ -1,0 +1,27 @@
+[
+    {
+		"id":1,
+		"name":"001",
+		"model":"2",
+	    "situation":"危险",
+		"warndata":"56",
+		"initialx": 1,
+		"initialy": 1,
+		"ironId": 1,
+		"handelStatus": 1,
+		"switch": "关"
+    },
+	{
+		"id":2,
+		"name":"002",
+		"model":"2",
+	    "situation":"安全",
+		"warndata":"56",
+		"initialx": 1,
+		"initialy": 1,
+		"ironId": 1,
+		"handelStatus": 1,
+		"switch": "关"
+	}
+	
+]

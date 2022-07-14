@@ -1,0 +1,72 @@
+[
+	{
+		"id":1,
+		"sensorName":"001",
+		"day":"2021-9-14 19:04:14",
+		"totalMin":20,
+		"totalMax":32.2
+	},
+	{
+		"id":2,
+		"sensorName":"002",
+		"day":"2021-9-14 19:04:14",
+		"totalMin":20,
+		"totalMax":32.2
+	},
+	{
+		"id":3,
+		"sensorName":"003",
+		"day":"2021-9-14 19:04:14",
+		"totalMin":20,
+		"totalMax":32.2
+	},
+	{
+		"id":4,
+		"sensorName":"004",
+		"day":"2021-9-14 19:04:14",
+		"totalMin":20,
+		"totalMax":32.2
+	},
+	{
+		"id":5,
+		"sensorName":"005",
+		"day":"2021-9-14 19:04:14",
+		"totalMin":20,
+		"totalMax":32.2
+	},
+	{
+		"id":6,
+		"sensorName":"006",
+		"day":"2021-9-14 19:04:14",
+		"totalMin":20,
+		"totalMax":32.2
+	},
+	{
+		"id":7,
+		"sensorName":"007",
+		"day":"2021-9-14 19:04:14",
+		"totalMin":20,
+		"totalMax":32.2
+	},
+	{
+		"id":8,
+		"sensorName":"008",
+		"day":"2021-9-14 19:04:14",
+		"totalMin":20,
+		"totalMax":32.2
+	},
+	{
+		"id":9,
+		"sensorName":"009",
+		"day":"2021-9-14 19:04:14",
+		"totalMin":20,
+		"totalMax":32.2
+	},
+	{
+		"id":10,
+		"sensorName":"010",
+		"day":"2021-9-14 19:04:14",
+		"totalMin":20,
+		"totalMax":32.2
+	}
+]

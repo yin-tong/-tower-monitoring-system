@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>铁塔数据</title>
+    <meta name="description" content="AdminLTE2定制版">
+    <meta name="keywords" content="AdminLTE2定制版">
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+   
+   <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css">
+   <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
+   <link rel="stylesheet" href="plugins/ionicons/css/ionicons.min.css">
+   <link rel="stylesheet" href="plugins/adminLTE/css/AdminLTE.css">
+   <link rel="stylesheet" href="plugins/adminLTE/css/skins/_all-skins.min.css">
+   <link rel="stylesheet" href="css/index.css">
+	
+</head>
+
+<body class="hold-transition skin-purple sidebar-mini">
+	<script src="js/vue.global.js"></script>
+	<script src="js/index.full.js"></script>
+    <div class="wrapper">
+		<div class="content" style="margin-left: 0%;height: 800px;>
+		  <!-- 内容头部 -->
+			 <section class="content-header">
+				 <p style="color: white;font-size: 23px;font-weight:bold;margin-left:1.5%">
+				     铁塔数据
+				 </p>
+			 </section>
+		   <!-- 内容头部 /-->
+		 
+			 <!-- 正文区域 -->
+			 <section class="content" style="height: 500px;">
+ 
+				 <!-- .box-body -->
+				 <div class="box box-primary" style="background-color:#293441;">
+ 
+					 <div class="box-body">
+						 <!-- 数据表格 -->
+						 <div class="table-box"  id="app">
+ 
+							 <!--工具栏-->
+							 <div class="pull-left">
+								 <div class="form-group form-inline">
+									 <div class="btn-group">
+										 <button type="button" class="btn btn-info" title="新增" onclick='location.href="ironDataManagerAdd.html"'><i class="fa fa-file-o"></i> 新建</button>
+										 <button type="button" class="btn btn-info" title="删除" onclick='confirm("你确认要删除吗？")' style="margin-left:3px"><i class="fa fa-trash-o"></i> 删除</button>
+									 </div>
+								 </div>
+							 </div>
+							 <div class="box-tools pull-right">
+								 <div class="has-feedback" style="height:10%">
+									 <el-input v-model="search"  type="text" class="name" placeholder="根据传感器名称搜索" @input="a(search)"></el-input>
+									 <span class="glyphicon glyphicon-search form-control-feedback"></span>
+								 </div>
+							 </div>
+							 <br>
+							 <!--工具栏/-->
+ 
+							 <!--数据列表-->
+							 <div>
+						     <br>
+							 <br>
+							 <el-table
+							     :cell-style="cellStyle()"
+							     :header-cell-style="cellStyle()"
+								 :row-style="{height: '0'}"
+							     :data="list"
+							     border
+							     style="width: 100%">
+								 <el-table-column 
+								    align="center"
+								    label="序号"
+								    type="selection"> 
+								 </el-table-column>
+								 <el-table-column
+								    align="center"
+								    label="铁塔编号"
+									min-width="10%"
+								    prop="id"> 
+								 </el-table-column>
+							     </el-table-column>
+							     <el-table-column
+								  align="center"
+								  min-width="10%"
+							       prop="ironName"
+							       label="铁塔名称">
+							     </el-table-column>
+								 <el-table-column
+								   align="center"
+								   min-width="10%"
+								   prop="precision"
+								   label="经度">
+								 </el-table-column>
+								 <el-table-column
+								   align="center"
+								   min-width="10%"
+								   prop="latitude"
+								   label="维度">
+								 </el-table-column>
+							 	</el-table-column>
+							 	<el-table-column
+								  min-width="10%"
+								  align="center"
+							 	  prop="location"
+							 	  label="位置">
+							 	</el-table-column>		    
+							 	<el-table-column
+								  min-width="10%"
+								  align="center"
+							 	  prop="situation"
+							 	  label="铁塔状态">
+							 	</el-table-column>
+								  <el-table-column
+								    align="center"
+								    min-width="15%"
+								    label="操作">
+								    <template #default="scope">
+								  	 <el-button type="primary" size="mini">删除</el-button>
+									 <el-button type="primary" size="mini" @click="update">修改</el-button>
+									  <el-button type="primary" size="mini" @click="details">详情</el-button>
+								    </template>
+								   </el-table-column>
+							   </el-table>
+							   
+							   <div style="margin-top:1%">
+							   	<el-row :gutter="10">
+							   		<el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
+							   		<el-col :span="8">
+										<el-pagination
+										  right
+										  background
+										  @size-change="handleSizeChange"
+										  @current-change="handleCurrentChange"
+										  :current-page="page" 
+										  :page-sizes="[5,7,10,15,20]" 
+										  :page-size="limit"
+										  layout="total, sizes, prev, pager, next, jumper" 
+										  :total="total">
+										</el-pagination>
+							   		</el-col>
+							   	</el-row>
+							   </div>
+							 </div><br />
+							 <!-- /表格 -->
+							 
+							 <!--数据列表/--> 
+						 </div>
+						 <!-- 数据表格 /--> 
+					 </div>
+					 <!-- /.box-body -->
+ 
+						
+ 
+ 
+				 </div>
+ 
+			 </section>
+			 <!-- 正文区域 /-->
+        </div>
+    </div>
+
+    <script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
+	<script>
+	    $.get('json/data/iron.json',function(ret){
+			console.log(ret);
+			var Main = {
+			        data() {
+			             return {
+			                 list: [],
+			                 data: [],
+			                 limit: 7,
+			                 total: null,
+			                 page: 1,
+							 search:"",
+			                 searchData: "",
+							 param:"开启"
+			             }
+			         },
+			        created() {
+			             this.pageList()
+			         },
+			         methods: {
+						 details(){
+							 location.href="ironDataManagerDetails.html"
+					     },
+					
+						 search(){
+						 	console.log("8888888")
+						 },
+						 update(){
+							 location.href="ironDataManagerUpdate.html"
+						 },
+						 cellStyle(){
+						     return 'background-color:#293441;color:white;border-color:#2E72BF'						  
+						 },
+			             pageList() {
+			                 // 发请求拿到数据并暂存所有数据,方便以后操做
+			                 this.data = ret
+			                 this.getList()
+			             },
+			             // 处理数据
+			             getList() {
+			                 // es6过滤获得知足搜索条件的展现数据list
+			                 let list = this.data.filter((item, index) =>
+			                     item.ironName.includes(this.searchData)
+			                 )
+			                 this.list = list.filter((item, index) =>
+			                     index < this.page * this.limit && index >= this.limit * (this.page - 1)
+			                 )
+			                 this.total = list.length
+			             },
+			             // 当每页数量改变
+			             handleSizeChange(val) {
+			                 console.log(`每页 ${val} 条`);
+			                 this.limit = val
+			                 this.getList()
+			             },
+			             // 当当前页改变
+			             handleCurrentChange(val) {
+			                 console.log(`当前页: ${val}`);
+			                 this.page = val
+			                 this.getList()
+			             },
+			             // 搜索过滤数据
+			             search() {
+			                 this.page = 1
+			                 this.getList()
+			             }
+			         }
+			 };
+			const app = Vue.createApp(Main);
+			app.use(ElementPlus);
+			app.mount("#app")
+		});
+	</script>
+</body>
+
+</html>
+<!---->

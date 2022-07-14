@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>铁塔信息详情</title>
+    <meta name="description" content="AdminLTE2定制版">
+    <meta name="keywords" content="AdminLTE2定制版">
+    <meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport">
+   
+    <link rel="stylesheet" href="plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="plugins/datatables/dataTables.bootstrap.css">
+    <link rel="stylesheet" href="plugins/adminLTE/css/AdminLTE.css">
+    <link rel="stylesheet" href="plugins/adminLTE/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="css/index.css">
+	<style>
+		.el-input__inner{
+			background-color: rgba(46,77,112,1) ;
+			color: white;
+        }
+		.el-form-item__label{
+			color: white;
+		}
+	</style>
+</head>
+
+<body class="hold-transition skin-purple sidebar-mini">
+	<script src="js/vue.global.js"></script>
+	<script src="js/index.full.js"></script>
+    <div class="wrapper">
+		<div id="app" class="content" style="margin-left: 0%;height: 800px;>
+		  <!-- 内容头部 -->
+			 <section class="content-header">
+				 <p style="color: white;font-size: 23px;font-weight:bold;margin-left:1.5%">
+				    铁塔信息详情
+				 </p>
+			 </section>
+		   <!-- 内容头部 /-->
+		 
+			 <!-- 正文区域 -->
+			 <section class="content" style="height: 500px;">				 
+				 
+				 <!-- 传感器表格 -->
+				 <div class="box box-primary" style="background-color:#293441;">
+				 	 <div class="box-body">
+				 		 <!-- 数据表格 -->
+				 		 <div class="table-box">
+				 			 <!--数据列表-->
+				 			 <div>
+				 			 <br>
+				 			<el-table
+				 				:cell-style="cellStyle()"
+				 				:header-cell-style="cellStyle()"
+				 				:row-style="{height: '0'}"
+				 				:data="list"
+				 				border
+				 				style="width: 100%">
+				 				 <el-table-column
+				 					align="center"
+				 					label="传感器编号"
+				 					min-width="10%"
+				 					prop="id"> 
+				 				 </el-table-column>
+				 				</el-table-column>
+				 				<el-table-column
+				 				  align="center"
+				 				  min-width="10%"
+				 				  prop="name"
+				 				  label="传感器名称">
+				 				</el-table-column>
+				 				 <el-table-column
+				 				   align="center"
+				 				   min-width="10%"
+				 				   prop="model"
+				 				   label="型号">
+				 				 </el-table-column>
+				 				 <el-table-column
+				 				   align="center"
+				 				   min-width="10%"
+				 				   prop="warndata"
+				 				   label="警告阈值">
+				 				 </el-table-column>
+				 				</el-table-column>
+				 				<el-table-column
+				 				  align="center"
+				 				  min-width="12%"
+				 				  prop="initialx"
+				 				  label="初始x轴倾斜度">
+				 				</el-table-column>
+				 				<el-table-column
+				 				  align="center"
+				 				  min-width="12%"
+				 				  prop="initialy"
+				 				  label="初始y轴倾斜度">
+				 				</el-table-column>	 
+				 				<el-table-column
+				 				  align="center"
+				 				  min-width="10%"
+				 				  prop="initialy"
+				 				  label="铁塔编号">
+				 				</el-table-column>	 
+				 				<el-table-column
+				 				  min-width="10%"
+				 				  align="center"
+				 				  prop="situation"
+				 				  label="传感器状态">
+				 				</el-table-column>
+				 			  </el-table>
+				 			  
+				 			  <div style="margin-top:1%">
+				 				<el-row :gutter="10">
+				 					<el-col :span="6"><div class="grid-content bg-purple"></div></el-col>
+				 					<el-col :span="8">
+				 						<el-pagination
+				 						  right
+				 						  background
+				 						  @size-change="handleSizeChange"
+				 						  @current-change="handleCurrentChange"
+				 						  :current-page="page" 
+				 						  :page-sizes="[5,7,10,15,20]" 
+				 						  :page-size="limit"
+				 						  layout="total, sizes, prev, pager, next, jumper" 
+				 						  :total="total">
+				 						</el-pagination>
+				 					</el-col>
+				 				</el-row>
+				 			  </div>
+				 			   
+				 			 </div><br />
+				 			 <!-- /表格 -->
+				 			 
+				 			 <!--数据列表/--> 
+				 		 </div>
+				 	</div>
+				 </div><br>
+				 <!-- 传感器表格/ -->
+				 
+				 
+				 <!-- .box-body -->
+				 <div id ="table"  style="background-color:#293441;">
+					 <div class="box-body">						
+						 <div class="table-box">
+							 
+							 <el-form ref="form" :model="form" label-width="30%">	 
+							   
+							   <el-row :gutter="24">
+								   <el-col :span="22">
+									   <el-form-item label="铁塔名称:" style="margin-left:8%">
+											<el-input v-model="form.ironName" placeholder="铁塔名称" style="width:71%"></el-input>								  
+									   </el-form-item>										   
+								   </el-col>				  
+							   </el-row>
+							   
+							   <el-row :gutter="24">
+									   <el-col :span="22">
+										   <el-form-item label="经度:" style="margin-left:8%">
+												<el-input v-model="form.precision" placeholder="经度" style="width:71%"></el-input>								  
+										   </el-form-item>										   
+									   </el-col>				  
+							   </el-row>
+							   
+							   <el-row :gutter="24">
+								   <el-col :span="22">
+									   <el-form-item label="纬度:" style="margin-left:8%">
+											<el-input v-model="form.latitude" placeholder="纬度" style="width:71%"></el-input>								  
+									   </el-form-item>										   
+								   </el-col>				  
+							   </el-row>
+							   
+							   <el-row :gutter="24">
+								   <el-col :span="22">
+									   <el-form-item label="位置:" style="margin-left:8%">
+											<el-input v-model="form.location" placeholder="位置" style="width:71%"></el-input>								  
+									   </el-form-item>										   
+								   </el-col>				  
+							   </el-row>
+							   
+							   <el-row :gutter="24">
+								   <el-col :span="22">
+									   <el-form-item label="第一负责人:" style="margin-left:8%">
+											<el-input v-model="form.oneAlertPeopleName" placeholder="第一负责人" style="width:71%"></el-input>								  
+									   </el-form-item>										   
+								   </el-col>				  
+							   </el-row>
+							   
+							   <el-row :gutter="24">
+								   <el-col :span="22">
+									   <el-form-item label="第二负责人:" style="margin-left:8%">
+											<el-input v-model="form.twoAlertPeopleName" placeholder="第二负责人" style="width:71%"></el-input>								  
+									   </el-form-item>										   
+								   </el-col>				  
+							   </el-row>
+							   
+							   <el-row :gutter="24">
+								   <el-col :span="22">
+									   <el-form-item label="第三负责人:" style="margin-left:8%">
+											<el-input v-model="form.threeAlertPeopleName" placeholder="第三负责人" style="width:71%"></el-input>								  
+									   </el-form-item>										   
+								   </el-col>				  
+							   </el-row>
+							   
+							   <el-row :gutter="24">
+								   <el-col :span="22">
+										 <el-form-item style="margin-left:27%">
+											<el-button @click="back" style="margin-left:5%"> 返回</el-button>
+							            </el-form-item>								   
+									</el-col>				  
+							   </el-row>
+							 </el-form>
+							 <!-- /表格 -->
+							 
+							 <!--数据列表/--> 
+						 </div>
+						
+					 </div>
+					 <!-- /.box-body -->		 
+				 </div>
+				 
+				
+ 
+ 
+			 </section>
+			 <!-- 正文区域 /-->
+        </div>
+    </div>
+
+    <script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
+	<script>
+		$.get('json/data/sensor_iron.json',function(ret){
+			var Main = {
+			    data() {
+			      return {
+				    list: ret,
+					
+				
+			        form: {
+						ironName:'',
+						precision:'',
+						latitude:'',
+						location:'',
+						oneAlertPeopleName:'',
+						twoAlertPeopleName:'',
+						threeAlertPeopleName:''
+			        }
+			      }
+			    },
+				created() {
+				    
+				},
+			    methods: {
+				  cellStyle(){
+				      return 'background-color:#293441;color:white;border-color:#2E72BF'						  
+				  },
+				  back() {
+				    window.history.back();
+				  }
+				  
+			      
+			    }
+			  }
+			;const app = Vue.createApp(Main);
+			app.use(ElementPlus);
+			app.mount("#app")
+			
+		});
+	</script>
+</body>
+
+</html>
+<!---->
